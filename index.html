@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta name="description" content="Your description goes here">
+    	<meta name="keywords" content="one, two, three">
+
+		<title>City Background</title>
+
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/style.css">
+
+	</head>
+	<body>
+		<header>
+			<div class="title">
+				<h1>CitiPix</h1>
+				<p>Your Cities, Your Pix</p>
+			</div>
+		</header>
+			<div class="container">
+				<form>
+					<input type="text" id="city-type" placeholder="Enter a city name...">
+					<input type="submit" value="Update" id="submit-btn">
+				</form>
+			</div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		var city;
+		var cities = {"new york":".nyc",
+				"new york city":"nyc",
+				"nyc":"nyc",
+				"san francisco":"sf",
+				"sf":"sf",
+				"bay area":"sf",
+				"los angeles":"la",
+				"la":"la",
+				"lax":"la",
+				"austin":"austin",
+				"atx":"austin",
+				"sydney":"sydney",
+				"syd":"sydney" };
+
+		$('#submit-btn').click(function(e) {
+			var body = $(document.body); 				//create a jquery object using the document body
+			var inputcontrol = $('#city-type'); 			//get the user input control through jquery and store it in a variable for later user
+			var temp = inputcontrol.val().toLowerCase().trim(); 	//get text from the user input control, convert to lower case and remove any spaces before or after
+			if (cities[temp] !== undefined) { 			//if we have a mapped image for the entered input
+				if (city !== null) {				//if user has previously entered a valid input
+					body.removeClass(cities[city]);		//remove the previous image so we don't stack unneeded css classes
+				}
+				body.addClass(cities[temp]);			//change the background image by adding a css class
+				city = temp;					//store the input so we can remove it later if need be
+			}
+			inputcontrol.val('');					//reset user input control
+			e.preventDefault();					//stop the form from submitting to the server
+		});
+
+	});
+
+</script>
+
+	</body>
+</html>
